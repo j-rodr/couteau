@@ -11,12 +11,14 @@ import HamburgerMenuIcon from './components/icons/HamburgerMenu';
 import GenderView from './views/Gender';
 import AgeView from './views/Age';
 import UniversitiesView from './views/Universities';
+import WeatherView from './views/Weather';
 
 const SCREENS = {
   home: <HomeView />,
   gender: <GenderView />,
   age: <AgeView />,
   universities: <UniversitiesView />,
+  weather: <WeatherView />,
 };
 
 export default function App() {
@@ -67,7 +69,7 @@ export default function App() {
           justifyContent: 'center',
         }}
       >
-        {SCREENS.universities}
+        {SCREENS.weather}
       </View>
     </ScrollView>
   );
