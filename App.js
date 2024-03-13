@@ -1,19 +1,27 @@
-import { View, StatusBar, TouchableOpacity, Text } from 'react-native';
+import {
+  View,
+  StatusBar,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+} from 'react-native';
 import HomeView from './views/Home';
 import { SCREEN, HORIZONTAL_SPACING } from './utils/constants';
 import HamburgerMenuIcon from './components/icons/HamburgerMenu';
 import GenderView from './views/Gender';
 import AgeView from './views/Age';
+import UniversitiesView from './views/Universities';
 
 const SCREENS = {
   home: <HomeView />,
   gender: <GenderView />,
   age: <AgeView />,
+  universities: <UniversitiesView />,
 };
 
 export default function App() {
   return (
-    <View
+    <ScrollView
       style={{
         flex: 1,
         backgroundColor: '#fff',
@@ -59,8 +67,8 @@ export default function App() {
           justifyContent: 'center',
         }}
       >
-        {SCREENS.age}
+        {SCREENS.universities}
       </View>
-    </View>
+    </ScrollView>
   );
 }
