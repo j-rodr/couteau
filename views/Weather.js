@@ -59,12 +59,8 @@ export default function WeatherView() {
       {!loading && (
         <View
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 25,
-            paddingVertical: 15,
+            paddingTop: 18,
+            paddingBottom: 22,
             paddingHorizontal: 20,
             borderRadius: 5,
             borderWidth: 1,
@@ -73,27 +69,50 @@ export default function WeatherView() {
         >
           <View
             style={{
-              gap: 3,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 25,
+              width: SCREEN.width - 130,
             }}
           >
-            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-              {weather?.description}
-            </Text>
-            <Text style={{ fontSize: 30 }}>{weather?.degreesCelsius} °C</Text>
-            <Text>{`${String(now.getUTCDate()).padStart(2, '0')}/${String(
-              now.getUTCMonth() + 1
-            ).padStart(2, '0')}/${String(now.getUTCFullYear()).padStart(
-              2,
-              '0'
-            )}`}</Text>
+            <View
+              style={{
+                justifyContent: 'space-between',
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                {weather?.description}
+              </Text>
+              <Text style={{ fontSize: 30 }}>{weather?.degreesCelsius} °C</Text>
+            </View>
+
+            <Image
+              style={{ width: 90, height: 90 }}
+              source={{
+                uri: `https:${weather?.imageUrl}`,
+              }}
+            />
           </View>
 
-          <Image
-            style={{ width: 90, height: 90 }}
-            source={{
-              uri: `https:${weather?.imageUrl}`,
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
             }}
-          />
+          >
+            <Text style={{ color: '#707070', fontSize: 16 }}>
+              República Dominicana
+            </Text>
+            <Text style={{ color: '#707070', fontSize: 16 }}>{`${String(
+              now.getUTCDate()
+            ).padStart(2, '0')}/${String(now.getUTCMonth() + 1).padStart(
+              2,
+              '0'
+            )}/${String(now.getUTCFullYear()).padStart(2, '0')}`}</Text>
+          </View>
         </View>
       )}
       {loading && (
