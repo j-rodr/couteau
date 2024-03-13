@@ -5,33 +5,64 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import { tryCatch } from '../utils/core';
 import { SCREEN } from '../utils/constants';
 
-const GENDER_SPANISH_MAPPINGS = {
-  female: 'Femenino',
-  male: 'Masculino',
+const imageStyles = {
+  width: 180,
+  height: 180,
+  borderRadius: 8,
+  marginHorizontal: 'auto',
+  marginVertical: 25,
 };
 
-export default function GenderView() {
-  const [gender, setGender] = useState();
+const IMAGE_MAPPINGS = {
+  joven: (
+    <Image
+      style={imageStyles}
+      source={require('../assets/images/young-man.png')}
+    />
+  ),
+  adulto: (
+    <Image
+      style={imageStyles}
+      source={require('../assets/images/adult-woman.jpg')}
+    />
+  ),
+  anciano: (
+    <Image
+      style={imageStyles}
+      source={require('../assets/images/older-man.jpg')}
+    />
+  ),
+};
+
+function getAgeAdjective(age) {
+  if (age <= 25) return 'joven';
+  else if (age <= 55) return 'adulto';
+  else return 'anciano';
+}
+
+export default function AgeView() {
+  const [age, setAge] = useState();
   const [name, setName] = useState();
   const [requiredError, setRequiredError] = useState();
   const [resultIsVisible, setResultIsVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const getGenderPrediction = async () => {
+  const getAgePrediction = async () => {
     tryCatch(
       async () => {
         setResultIsVisible(false);
         setLoading(true);
 
-        const response = await fetch(`https://api.genderize.io/?name=${name}`);
+        const response = await fetch(`https://api.agify.io/?name=${name}`);
         const json = await response.json();
 
-        if ('gender' in json) {
-          setGender(json.gender);
+        if ('age' in json) {
+          setAge(json.age);
           setResultIsVisible(true);
         }
       },
@@ -60,7 +91,7 @@ export default function GenderView() {
           marginBottom: 25,
         }}
       >
-        Predictor de género
+        Predictor de edad
       </Text>
       <TextInput
         style={{
@@ -91,7 +122,7 @@ export default function GenderView() {
           Debe proporcionar un nombre.
         </Text>
       )}
-      {gender === null && (
+      {age === null && (
         <Text
           style={{
             color: '#DC2626',
@@ -122,7 +153,7 @@ export default function GenderView() {
             setRequiredError('Debe proporcionar un nombre.');
           } else {
             setRequiredError();
-            getGenderPrediction();
+            getAgePrediction();
           }
         }}
       >
@@ -131,17 +162,24 @@ export default function GenderView() {
         </Text>
       </TouchableOpacity>
       {resultIsVisible && !loading && (
-        <Text
-          style={{
-            fontSize: 20,
-            marginTop: 30,
-            paddingHorizontal: 20,
-            textAlign: 'center',
-          }}
-        >
-          El género de {name} es: {GENDER_SPANISH_MAPPINGS[gender]}
-          {gender === 'female' ? '  ♀️🚺💃🏾' : '  🚹♂️🧔🏾‍♂️'}
-        </Text>
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Text
+            style={{
+              display: 'flex',
+              fontSize: 20,
+              marginTop: 30,
+              paddingHorizontal: 20,
+              textAlign: 'center',
+            }}
+          >
+            Su edad estimada es: {age}
+          </Text>
+
+          {IMAGE_MAPPINGS[getAgeAdjective(age)]}
+          <Text style={{ fontSize: 18 }}>
+            Usted es un {getAgeAdjective(age)}
+          </Text>
+        </View>
       )}
       {loading && (
         <ActivityIndicator

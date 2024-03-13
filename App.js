@@ -3,10 +3,12 @@ import HomeView from './views/Home';
 import { SCREEN, HORIZONTAL_SPACING } from './utils/constants';
 import HamburgerMenuIcon from './components/icons/HamburgerMenu';
 import GenderView from './views/Gender';
+import AgeView from './views/Age';
 
 const SCREENS = {
   home: <HomeView />,
   gender: <GenderView />,
+  age: <AgeView />,
 };
 
 export default function App() {
@@ -57,7 +59,7 @@ export default function App() {
           justifyContent: 'center',
         }}
       >
-        {SCREENS.gender}
+        {SCREENS.age}
       </View>
     </View>
   );
