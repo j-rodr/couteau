@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/profile.jpg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.jogarobi.couteau"
     },
     "web": {
       "favicon": "./assets/images/profile.jpg"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f4a6a9ff-793a-4e1b-8d96-d0593e6d9dd8"
+      }
     }
   }
 }
