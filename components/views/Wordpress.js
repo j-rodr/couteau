@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Text, View, Linking, TouchableOpacity } from 'react-native';
-import { SCREEN } from '../utils/constants';
+import { SCREEN } from '../../utils/constants';
 
 export default function WordpressView() {
   const [posts, setPosts] = useState();

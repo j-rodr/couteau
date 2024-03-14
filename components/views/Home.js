@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 
 export default function HomeView() {
@@ -15,7 +15,7 @@ export default function HomeView() {
       </Text>
       <Image
         style={{ width: 300, height: 300 }}
-        source={require('../assets/images/toolkit.jpg')}
+        source={require('../../assets/images/toolkit.jpg')}
       />
       <Text style={{ fontSize: 18, color: '#191919' }}>
         ¡Bienvenido a la caja de herramientas!

@@ -5,14 +5,14 @@ import {
   Text,
   ScrollView,
 } from 'react-native';
-import HomeView from './views/Home';
+import HomeView from './components/views/Home';
 import { SCREEN, HORIZONTAL_SPACING } from './utils/constants';
 import HamburgerMenuIcon from './components/icons/HamburgerMenu';
-import GenderView from './views/Gender';
-import AgeView from './views/Age';
-import UniversitiesView from './views/Universities';
-import WeatherView from './views/Weather';
-import WordpressView from './views/Wordpress';
+import GenderView from './components/views/Gender';
+import AgeView from './components/views/Age';
+import UniversitiesView from './components/views/Universities';
+import WeatherView from './components/views/Weather';
+import WordpressView from './components/views/Wordpress';
 
 const SCREENS = {
   home: <HomeView />,

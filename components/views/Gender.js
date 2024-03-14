@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-import { tryCatch } from '../utils/core';
-import { SCREEN } from '../utils/constants';
+import { tryCatch } from '../../utils/core';
+import { SCREEN } from '../../utils/constants';
 
 const GENDER_SPANISH_MAPPINGS = {
   female: 'Femenino',

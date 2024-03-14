@@ -1,7 +1,7 @@
 import { Text, View, ActivityIndicator, Image } from 'react-native';
 import { useEffect, useState } from 'react';
-import { tryCatch } from '../utils/core';
-import { SCREEN } from '../utils/constants';
+import { tryCatch } from '../../utils/core';
+import { SCREEN } from '../../utils/constants';
 
 const WEATHER_API_KEY = '620a6278d00444faa4f221810241303';
 
