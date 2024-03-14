@@ -12,6 +12,7 @@ import GenderView from './views/Gender';
 import AgeView from './views/Age';
 import UniversitiesView from './views/Universities';
 import WeatherView from './views/Weather';
+import WordpressView from './views/Wordpress';
 
 const SCREENS = {
   home: <HomeView />,
@@ -19,6 +20,7 @@ const SCREENS = {
   age: <AgeView />,
   universities: <UniversitiesView />,
   weather: <WeatherView />,
+  wordpress: <WordpressView />,
 };
 
 export default function App() {
@@ -69,7 +71,7 @@ export default function App() {
           justifyContent: 'center',
         }}
       >
-        {SCREENS.weather}
+        {SCREENS.wordpress}
       </View>
     </ScrollView>
   );

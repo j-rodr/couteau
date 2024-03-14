@@ -34,7 +34,7 @@ export default function WeatherView() {
     };
 
     getWeather();
-  });
+  }, []);
 
   return (
     <View

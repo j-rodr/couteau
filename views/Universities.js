@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  Linking,
 } from 'react-native';
 import { tryCatch } from '../utils/core';
 import { COUNTRY_NAMES_SPANISH_TO_ENGLISH, SCREEN } from '../utils/constants';
@@ -162,14 +163,11 @@ export default function UniversitiesView() {
               <Text style={{ fontSize: 17 }}>
                 Dominio: {university.domains[0]}
               </Text>
-              <Text
-                style={{
-                  color: '#2563EB',
-                  fontSize: 17,
-                }}
+              <TouchableOpacity
+                onPress={Linking.openURL(university.web_pages[0])}
               >
-                Página web: {university.web_pages[0]}
-              </Text>
+                <Text>{university.web_pages[0]}</Text>
+              </TouchableOpacity>
             </View>
           ))}
         </View>
