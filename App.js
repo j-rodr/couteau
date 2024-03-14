@@ -15,6 +15,7 @@ import WeatherView from './components/views/Weather';
 import WordPressView from './components/views/WordPress';
 import SideNavigation from './components/SideNavigation';
 import { useState } from 'react';
+import AboutView from './components/views/About';
 
 const SCREENS = {
   home: <HomeView />,
@@ -23,6 +24,7 @@ const SCREENS = {
   universities: <UniversitiesView />,
   weather: <WeatherView />,
   wordpress: <WordPressView />,
+  about: <AboutView />,
 };
 
 const NAV_ITEMS = [
@@ -49,6 +51,10 @@ const NAV_ITEMS = [
   {
     label: 'WordPress',
     view: 'wordpress',
+  },
+  {
+    label: 'Contacto',
+    view: 'about',
   },
 ];
 

@@ -46,7 +46,6 @@ export default function GenderView() {
   return (
     <View
       style={{
-        width: SCREEN.width - 30,
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: SCREEN.height - 200,
