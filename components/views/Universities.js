@@ -52,7 +52,6 @@ export default function UniversitiesView() {
   return (
     <View
       style={{
-        width: SCREEN.width - 30,
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: SCREEN.height - 200,
@@ -146,6 +145,7 @@ export default function UniversitiesView() {
             gap: 20,
             paddingTop: 30,
             paddingHorizontal: 15,
+            paddingBottom: 70,
           }}
         >
           {universities.map((university, index) => (
@@ -155,7 +155,7 @@ export default function UniversitiesView() {
                 borderColor: '#F3F3F3',
                 borderRadius: 5,
                 borderWidth: 1,
-                padding: 10,
+                padding: 18,
                 display: 'flex',
                 gap: 5,
               }}
@@ -167,9 +167,11 @@ export default function UniversitiesView() {
                 Dominio: {university.domains[0]}
               </Text>
               <TouchableOpacity
-                onPress={Linking.openURL(university.web_pages[0])}
+                onPress={() => Linking.openURL(university.web_pages[0])}
               >
-                <Text>{university.web_pages[0]}</Text>
+                <Text style={{ color: '#2563EB', fontSize: 17 }}>
+                  {university.web_pages[0]}
+                </Text>
               </TouchableOpacity>
             </View>
           ))}

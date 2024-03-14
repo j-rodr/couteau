@@ -1,9 +1,15 @@
 import { Text, View, Image } from 'react-native';
-
+import { SCREEN } from '../../utils/constants';
 
 export default function HomeView() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: SCREEN.height - 200,
+      }}
+    >
       <Text
         style={{
           fontSize: 20,

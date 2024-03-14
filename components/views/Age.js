@@ -80,6 +80,7 @@ export default function AgeView() {
         width: SCREEN.width - 30,
         justifyContent: 'center',
         alignItems: 'center',
+        minHeight: SCREEN.height - 200,
       }}
     >
       <Text

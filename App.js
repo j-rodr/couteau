@@ -12,7 +12,9 @@ import GenderView from './components/views/Gender';
 import AgeView from './components/views/Age';
 import UniversitiesView from './components/views/Universities';
 import WeatherView from './components/views/Weather';
-import WordpressView from './components/views/Wordpress';
+import WordPressView from './components/views/WordPress';
+import SideNavigation from './components/SideNavigation';
+import { useState } from 'react';
 
 const SCREENS = {
   home: <HomeView />,
@@ -20,59 +22,94 @@ const SCREENS = {
   age: <AgeView />,
   universities: <UniversitiesView />,
   weather: <WeatherView />,
-  wordpress: <WordpressView />,
+  wordpress: <WordPressView />,
 };
 
+const NAV_ITEMS = [
+  {
+    label: 'Inicio',
+    view: 'home',
+  },
+  {
+    label: 'Predictor de género',
+    view: 'gender',
+  },
+  {
+    label: 'Predictor de edad',
+    view: 'age',
+  },
+  {
+    label: 'Universidades',
+    view: 'universities',
+  },
+  {
+    label: 'Clima',
+    view: 'weather',
+  },
+  {
+    label: 'WordPress',
+    view: 'wordpress',
+  },
+];
+
 export default function App() {
+  const [activeView, setActiveView] = useState('home');
+  const [navIsVisible, setNavIsVisible] = useState(false);
+
+  const changeView = (newView) => {
+    setActiveView(newView);
+    setNavIsVisible(false);
+  };
+
+  const closeNav = () => {
+    setNavIsVisible(false);
+  };
+
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-        backgroundColor: '#fff',
-        marginTop: StatusBar.currentHeight,
-      }}
-    >
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: SCREEN.width,
-          paddingHorizontal: HORIZONTAL_SPACING,
-          paddingVertical: 18,
-          backgroundColor: '#191919',
-        }}
-      >
-        <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#FFFFFF' }}>
-          Inicio
-        </Text>
-        <TouchableOpacity
+    <View style={{ paddingTop: StatusBar.currentHeight }}>
+      {navIsVisible && (
+        <SideNavigation
+          links={NAV_ITEMS}
+          activeView={activeView}
+          changeView={changeView}
+          closeNav={closeNav}
+        />
+      )}
+      {!navIsVisible && (
+        <View
           style={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 14,
             flexDirection: 'row',
-            backgroundColor: '#FFFFFF',
-            paddingVertical: 15,
-            paddingHorizontal: 15,
-            borderRadius: 5,
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: SCREEN.width,
+            paddingHorizontal: HORIZONTAL_SPACING,
+            paddingVertical: 18,
+            backgroundColor: '#191919',
           }}
         >
-          <HamburgerMenuIcon />
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          display: 'flex',
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {SCREENS.wordpress}
-      </View>
-    </ScrollView>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#FFFFFF' }}>
+            {NAV_ITEMS.find((item) => item.view === activeView).label}
+          </Text>
+          <TouchableOpacity
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 14,
+              flexDirection: 'row',
+              backgroundColor: '#FFFFFF',
+              paddingVertical: 15,
+              paddingHorizontal: 15,
+              borderRadius: 5,
+            }}
+            onPress={() => setNavIsVisible(true)}
+          >
+            <HamburgerMenuIcon />
+          </TouchableOpacity>
+        </View>
+      )}
+      <ScrollView>{!navIsVisible && SCREENS[activeView]}</ScrollView>
+    </View>
   );
 }

@@ -1,17 +1,33 @@
 import { useEffect, useState } from 'react';
-import { Text, View, Linking, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  View,
+  Linking,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
 import { SCREEN } from '../../utils/constants';
+import { tryCatch } from '../../utils/core';
 
-export default function WordpressView() {
+export default function WordPressView() {
   const [posts, setPosts] = useState();
+  const [loading, setLoading] = useState(true);
+  const postsAreVisible = posts && !loading;
 
   useEffect(() => {
-    const getPosts = async () => {
-      const response = await fetch(
-        `https://boingboing.net/wp-json/wp/v2/posts`
-      );
+    setLoading(true);
 
-      setPosts(await response.json());
+    const getPosts = async () => {
+      tryCatch(
+        async () => {
+          const response = await fetch(
+            `https://boingboing.net/wp-json/wp/v2/posts`
+          );
+
+          setPosts(await response.json());
+        },
+        () => setTimeout(() => setLoading(false), 1000)
+      );
     };
 
     getPosts();
@@ -23,7 +39,8 @@ export default function WordpressView() {
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: 30,
-        paddingBottom: 50,
+        paddingBottom: 120,
+        minHeight: SCREEN.height - 200,
       }}
     >
       <Text
@@ -32,12 +49,21 @@ export default function WordpressView() {
           fontWeight: 'bold',
           color: '#191919',
           textAlign: 'center',
-          marginBottom: 25,
         }}
       >
         Publicaciones de BoingBoing
       </Text>
-      {posts && (
+      <Text style={{ marginBottom: 25, marginTop: 12, fontSize: 16 }}>
+        https://boingboing.net/
+      </Text>
+      {!postsAreVisible && (
+        <ActivityIndicator
+          style={{ marginTop: 25 }}
+          color='#191919'
+          size='large'
+        />
+      )}
+      {postsAreVisible && (
         <View style={{ gap: 20 }}>
           <View
             style={{
@@ -62,6 +88,18 @@ export default function WordpressView() {
                 {posts[0].yoast_head_json.description}
               </Text>
             </View>
+            <Text style={{ fontSize: 16, paddingTop: 10 }}>
+              {`${String(new Date(posts[0].date).getUTCDate()).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[0].date).getUTCMonth() + 1).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[0].date).getUTCFullYear()).padStart(
+                2,
+                '0'
+              )}`}
+            </Text>
             <TouchableOpacity
               onPress={() => Linking.openURL(posts[0].guid.rendered)}
             >
@@ -100,6 +138,18 @@ export default function WordpressView() {
                 {posts[1].yoast_head_json.description}
               </Text>
             </View>
+            <Text style={{ fontSize: 16, paddingTop: 10 }}>
+              {`${String(new Date(posts[1].date).getUTCDate()).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[1].date).getUTCMonth() + 1).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[1].date).getUTCFullYear()).padStart(
+                2,
+                '0'
+              )}`}
+            </Text>
             <TouchableOpacity
               onPress={() => Linking.openURL(posts[1].guid.rendered)}
             >
@@ -139,6 +189,18 @@ export default function WordpressView() {
                 {posts[2].yoast_head_json.description}
               </Text>
             </View>
+            <Text style={{ fontSize: 16, paddingTop: 10 }}>
+              {`${String(new Date(posts[1].date).getUTCDate()).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[1].date).getUTCMonth() + 1).padStart(
+                2,
+                '0'
+              )}/${String(new Date(posts[1].date).getUTCFullYear()).padStart(
+                2,
+                '0'
+              )}`}
+            </Text>
             <TouchableOpacity
               onPress={() => Linking.openURL(posts[2].guid.rendered)}
             >
